@@ -1,3 +1,4 @@
+
 # Zengeza Rentals
 
 A Django-based rental management system for landlords and tenants in Zimbabwe.
@@ -139,3 +140,7 @@ ALLOWED_HOSTS=yourdomain.com
 ## License
 
 This project is licensed under the MIT License.
+
+# Zengeza_rentals
+public website for business use
+
