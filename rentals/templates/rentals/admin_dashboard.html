@@ -1,0 +1,37 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Admin Dashboard (Agent)</h2>
+
+<h3>Pending Property Approvals</h3>
+{% for p in pending_properties %}
+<div>
+    {{ p.title }} - {{ p.landlord.username }}
+    <a href="{% url 'approve_property' p.id %}">Approve</a> |
+    <a href="{% url 'reject_property' p.id %}">Reject</a>
+</div>
+{% empty %}
+<p>No pending properties.</p>
+{% endfor %}
+
+<hr>
+
+<h3>Pending Payments</h3>
+{% for pay in pending_payments %}
+<div>
+    {{ pay.tenant.username }} → {{ pay.property.title }}
+    (${{ pay.amount }})
+    <a href="{% url 'approve_payment' pay.id %}">✅ Approve</a>
+    <a href="{% url 'reject_payment' pay.id %}">❌ Reject</a>
+</div>
+{% empty %}
+<p>No pending payments.</p>
+{% endfor %}
+
+<hr>
+
+<h3>Users</h3>
+<p>Landlords: {{ landlords.count }}</p>
+<p>Tenants: {{ tenants.count }}</p>
+
+{% endblock %}

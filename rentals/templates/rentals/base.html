@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zengeza 4 Rentals</title>
+</head>
+<body>
+
+<nav>
+    {% if user.is_authenticated %}
+        Logged in as {{ user.username }} |
+        {% if user.role == 'tenant' %}
+            <a href="{% url 'tenant_dashboard' %}">Tenant Dashboard</a>
+        {% elif user.role == 'landlord' %}
+            <a href="{% url 'landlord_dashboard' %}">Landlord Dashboard</a>
+        {% elif user.role == 'admin' %}
+            <a href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+        {% endif %}
+        | <a href="/logout/">Logout</a>
+    {% else %}
+        <a href="/login/">Login</a>
+    {% endif %}
+</nav>
+
+<hr>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

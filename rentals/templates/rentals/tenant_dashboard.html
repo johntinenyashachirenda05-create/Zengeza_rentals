@@ -1,0 +1,28 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Tenant Dashboard</h2>
+
+<h3>Active Unlocks</h3>
+{% for p in active_unlocks %}
+    <div>
+        <strong>{{ p.property.title }}</strong><br>
+        Expires: {{ p.expires_at }}
+    </div>
+{% empty %}
+    <p>No active unlocked properties.</p>
+{% endfor %}
+
+<hr>
+
+<h3>Payment History</h3>
+{% for p in payments %}
+    <div>
+        {{ p.property.title }} - ${{ p.amount }} -
+        {{ p.status }}
+    </div>
+{% empty %}
+    <p>No payments yet.</p>
+{% endfor %}
+
+{% endblock %}

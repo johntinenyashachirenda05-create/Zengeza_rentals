@@ -1,0 +1,14 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Add Property</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Property</button>
+</form>
+
+<p>Note: Property will be visible after admin approval.</p>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Landlord Dashboard</h2>
+
+<a href="{% url 'add_property' %}">➕ Add New Property</a>
+
+<hr>
+
+{% for property in properties %}
+<div>
+    <strong>{{ property.title }}</strong><br>
+    Rooms: {{ property.rooms }} |
+    Rent: ${{ property.rent }} |
+    Status: {{ property.status }}
+    <a href="{% url 'edit_property' property.id %}">✏️ Edit</a>
+</div>
+<hr>
+{% empty %}
+<p>No properties listed.</p>
+{% endfor %}
+
+{% endblock %}

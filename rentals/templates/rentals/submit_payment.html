@@ -1,0 +1,16 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Pay Agent Fee</h2>
+<p>Property: {{ property.title }}</p>
+<p>Amount: <strong>${{ amount }}</strong></p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Payment</button>
+</form>
+
+<p>Accepted: EcoCash | InnBucks | OneMoney</p>
+
+{% endblock %}

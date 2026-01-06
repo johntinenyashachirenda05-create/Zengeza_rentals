@@ -1,0 +1,52 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<div style="text-align: center; padding: 50px 20px;">
+    <h1>Welcome to Zengeza Rentals</h1>
+    <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+        Find your perfect rental property in Zimbabwe with our secure agent system.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; width: 300px;">
+            <h3>🏠 For Tenants</h3>
+            <p>Browse approved properties, pay agent fees securely, and unlock landlord contacts.</p>
+            <a href="{% url 'property_list' %}" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">Browse Properties</a>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; width: 300px;">
+            <h3>🏢 For Landlords</h3>
+            <p>List your properties for approval and connect with verified tenants.</p>
+            <a href="{% url 'register' %}?role=landlord" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;">Register as Landlord</a>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; width: 300px;">
+            <h3>👨‍💼 For Agents</h3>
+            <p>Manage property approvals and payment verifications.</p>
+            <p style="font-size: 14px; color: #666;">Contact admin for access</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px;">
+        <h2>How It Works</h2>
+        <ol style="display: inline-block; text-align: left; font-size: 16px; line-height: 1.6;">
+            <li><strong>Register:</strong> Create an account as a tenant or landlord</li>
+            <li><strong>Browse/List:</strong> Tenants browse properties, landlords list theirs</li>
+            <li><strong>Pay Agent Fee:</strong> Tenants pay ${{ agent_fee }} to unlock contacts</li>
+            <li><strong>Connect:</strong> Get landlord contact details for 72 hours</li>
+            <li><strong>Finalize:</strong> Arrange viewings and sign agreements directly</li>
+        </ol>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background: #e9ecef; border-radius: 8px;">
+        <h3>Sample Data Available</h3>
+        <p>Test the system with pre-created accounts:</p>
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Admin:</strong> username: admin, password: admin123</li>
+            <li><strong>Landlord:</strong> username: landlord1, password: pass123</li>
+            <li><strong>Tenant:</strong> username: tenant1, password: pass123</li>
+        </ul>
+        <p><a href="{% url 'property_list' %}">View Sample Property</a></p>
+    </div>
+</div>
+{% endblock %}

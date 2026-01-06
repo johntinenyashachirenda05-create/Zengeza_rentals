@@ -1,0 +1,43 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<h2>{{ property.title }} - {{ property.rooms }} rooms</h2>
+<img src="{{ property.photos.url }}" alt="property photo">
+
+{% if unlocked %}
+<p>Address: {{ property.address }}</p>
+<p>Landlord Contact: {{ property.landlord.phone }}</p>
+<p><strong>Access expires in:</strong> <span id="countdown"></span></p>
+
+<script>
+    const expiryTime = new Date("{{ payment.expires_at|date:'Y-m-d H:i:s' }}").getTime();
+
+    const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = expiryTime - now;
+
+        if (distance <= 0) {
+            clearInterval(timer);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+            location.reload();
+            return;
+        }
+
+        const hours = Math.floor(distance / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+            hours + "h " + minutes + "m " + seconds + "s";
+    }, 1000);
+</script>
+{% else %}
+<p>Address and contact hidden.</p>
+<p>Pay ${{ agent_fee }} to unlock for 72 hours.</p>
+{% if user.is_authenticated and user.role == 'tenant' %}
+<a href="{% url 'submit_payment' property.id %}">Pay Now</a>
+{% else %}
+<a href="{% url 'login' %}">Login as Tenant to Pay</a>
+{% endif %}
+{% endif %}
+{% endblock %}
